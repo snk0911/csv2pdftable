@@ -1,0 +1,6 @@
+ID|Name|Score|Grade|Passed
+001|Anna Schmidt|92.5|A|Yes
+002|Kenji Tanaka|87.3|B+|Yes
+003|María López|95.1|A+|Yes
+004|Łukasz Nowak|61.8|D|No
+005|İrem Yılmaz|78.4|C+|Yes

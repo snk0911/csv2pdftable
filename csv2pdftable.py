@@ -38,10 +38,21 @@ class TablePDF(FPDF):
         self.set_font('UniFont', '', 7)
         self.cell(0, 5, f'Page {self.page_no()}/{{nb}}', align='C')
 
+def detect_separator(filename):
+    import csv
+    with open(filename, 'r', encoding='utf-8') as f:
+        sample = f.read(8192)
+    try:
+        dialect = csv.Sniffer().sniff(sample, delimiters='\t,;|')
+        return dialect.delimiter
+    except csv.Error:
+        return ','
+
 def convert_file(filename, font_path):
-    df = pd.read_csv(filename, sep="\t", na_filter=False, index_col=1,
-                     lineterminator="\n", encoding="utf-8")
-    df = df.fillna('').reset_index()
+    sep = detect_separator(filename)
+    df = pd.read_csv(filename, sep=sep, na_filter=False,
+                     encoding="utf-8", engine="python")
+    df = df.fillna('').reset_index(drop=True)
 
     pdf_path = os.path.splitext(filename)[0] + '.pdf'
 
@@ -102,9 +113,12 @@ if __name__ == "__main__":
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
+    IGNORE = {'requirements.txt'}
+
     files = []
     for ext in ('*.csv', '*.tsv', '*.txt'):
         files.extend(glob.glob(os.path.join(script_dir, ext)))
+    files = [f for f in files if os.path.basename(f).lower() not in IGNORE]
 
     if not files:
         print(f"No CSV/TSV/TXT files found in {script_dir}")
