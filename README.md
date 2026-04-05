@@ -19,7 +19,7 @@ pip install -r requirements.txt
 Place your data files next to `csv2pdftable.py`, then:
  
 ```bash
-python csv2pdf-table.py
+python csv2pdftable.py
 ```
  
 PDFs appear in the same directory.
