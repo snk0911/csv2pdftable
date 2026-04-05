@@ -2,7 +2,7 @@
  
 Converts all CSV/TSV/TXT files in the script directory to formatted PDF tables. Auto-detects delimiters, supports Unicode, runs in parallel.
  
-Originally built for data curation work at a company where Word couldn't handle large datasets — the document would grow to hundreds of pages and become completely unusable. This script bypasses that limitation entirely.
+Originally built for data curation work at a company where Word couldn't handle large datasets- The document would grow to hundreds of pages and become completely unusable. This script bypasses that limitation entirely.
  
 ## Setup
  
